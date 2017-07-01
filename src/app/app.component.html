@@ -28,8 +28,11 @@
 
   <md-sidenav #sideNav class="height">
     <md-nav-list>
+      <a md-list-item [routerLink]="['/discover']" (click)="sideNav.close()">Discover</a>
       <a md-list-item [routerLink]="['/popular']" (click)="sideNav.close()">Popular</a>
       <a md-list-item [routerLink]="['/top-rated']" (click)="sideNav.close()">Top Rated</a>
+      
+      
     </md-nav-list>
   </md-sidenav>
 

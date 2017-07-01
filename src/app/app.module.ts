@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { PopularComponent } from './popular/popular.component';
 import { TopRatedComponent } from './top-rated/top-rated.component';
 import { MovieDetailsComponent, TrailerDialogComponent } from './movie-details/movie-details.component';
+import { DiscoverComponent } from './discover/discover.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MovieDetailsComponent, TrailerDialogComponent } from './movie-details/m
     PopularComponent,
     TopRatedComponent,
     MovieDetailsComponent,
-    TrailerDialogComponent
+    TrailerDialogComponent,
+    DiscoverComponent
   ],
   imports: [
     BrowserModule,

@@ -21,31 +21,45 @@ export class MovieDBService {
   }
 
   getMovieDetails(movieId): Observable<any[]> {
-    return this.http.get(`${this.API_BASE}movie/${movieId}?api_key=${this.API_KEY}&language=en-US`).map(function (res: Response) {
+    const movieDetilasUrl = `${this.API_BASE}movie/${movieId}?api_key=${this.API_KEY}&language=en-US`;
+    return this.http.get(movieDetilasUrl).map(function (res: Response) {
       return res.json();
     }).catch(this.handleError);
   }
 
   getMovieVideos(movieId): Observable<any[]> {
-    return this.http.get(`${this.API_BASE}movie/${movieId}/videos?api_key=${this.API_KEY}&language=en-US`).map((res: Response) => {
+    const movieTrailersUrl = `${this.API_BASE}movie/${movieId}/videos?api_key=${this.API_KEY}&language=en-US`;
+    return this.http.get(movieTrailersUrl).map((res: Response) => {
       return res.json();
     }).catch(this.handleError);
   }
 
   getMovieReviews(movieId): Observable<any[]> {
-    return this.http.get(`${this.API_BASE}movie/${movieId}/reviews?api_key=${this.API_KEY}&language=en-US`).map((res: Response) => {
+    const movieReviewUrl = `${this.API_BASE}movie/${movieId}/reviews?api_key=${this.API_KEY}&language=en-US`;
+    return this.http.get(movieReviewUrl).map((res: Response) => {
       return res.json();
     }).catch(this.handleError);
   }
 
+  getGenres(): Observable<any[]> {
+    const generesUrl = `${this.API_BASE}genre/movie/list?api_key=${this.API_KEY}&language=en-US`;
+    return this.http.get(generesUrl)
+      .map((response: Response) => response.json()).catch(this.handleError);
+  }
 
-  // Popular
-  //https://api.themoviedb.org/3/movie/popular?api_key=e98136de756705459104be0a2c27f514&language=en-US&page=1
-  //Reviews of movie id
-  //https://api.themoviedb.org/3/movie/297762/reviews?api_key=e98136de756705459104be0a2c27f514&language=en-US&page=1
+  getkeywords(val): Observable<any[]> {
+    const generesUrl = `${this.API_BASE}search/keyword?api_key=${this.API_KEY}&query=${val}&page=1`;
+    return this.http.get(generesUrl)
+      .map((response: Response) => response.json()).catch(this.handleError);
+  }
 
-  // Top Rate Movies
-  //https://api.themoviedb.org/3/movie/top_rated?api_key=e98136de756705459104be0a2c27f514&language=en-US&page=1
+  getDiscover(type, options): Observable<any[]> {
+    options.api_key = this.API_KEY;
+    const generesUrl = `${this.API_BASE}discover/${type}`;
+    return this.http.get(generesUrl, { search: options })
+      .map((response: Response) => response.json()).catch(this.handleError);
+  }
+
 
   private handleError(error: Response | any) {
     // In a real world app, you might use a remote logging infrastructure

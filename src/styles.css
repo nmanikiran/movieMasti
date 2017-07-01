@@ -2,13 +2,24 @@
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+
+*{
+    box-sizing: border-box;
+}
+
 .nav-right{
     position: absolute;
     right: 10px;
 }
+
+.container{
+    clear: both;
+    width: 90%;
+    margin: 0 auto;
+}
+
 .main-content{
     padding: 40px;
-    box-sizing: border-box;
     justify-content: center;
     align-content: center;
     display: flex;
@@ -30,6 +41,10 @@
 }
 
 @media only screen and (max-width: 1024px) {
+    .container{
+        width: 100%;
+        padding: 10px;
+    }
     .main-content{
         padding: 5px;
         display: flex;

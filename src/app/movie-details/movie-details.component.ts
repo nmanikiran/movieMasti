@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+
 import { MovieDBService } from '../services/movie-db.service';
 
 @Component({
@@ -13,7 +16,11 @@ export class MovieDetailsComponent implements OnInit {
   movie: any;
   index: number;
 
-  constructor(private route: ActivatedRoute, private dbService: MovieDBService) {
+  constructor(private route: ActivatedRoute,
+    private dbService: MovieDBService, public dialog: MdDialog,
+    public domSanitizer: DomSanitizer) {
+
+    this.domSanitizer = domSanitizer;
     this.movieId = route.snapshot.paramMap.get('id');
   }
 
@@ -24,7 +31,6 @@ export class MovieDetailsComponent implements OnInit {
   getMovieDetails(id) {
     this.dbService.getMovieDetails(id).subscribe((res: any) => {
       this.movie = res;
-      console.log(res);
       this.movie.poster_path = `http://image.tmdb.org/t/p/w500/${this.movie.poster_path}`;
       this.movie.backdrop_path = `http://image.tmdb.org/t/p/original/${this.movie.backdrop_path}`;
     });
@@ -58,4 +64,32 @@ export class MovieDetailsComponent implements OnInit {
     }
   }
 
+  openDialog(video) {
+    const videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${video.key}?autoplay=1`);
+    const dialogRef = this.dialog.open(TrailerDialogComponent, { data: { videoUrl: videoUrl } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+}
+
+@Component({
+  // tslint:disable-next-line:component-selector
+  selector: 'trailer-modal-dialog',
+  templateUrl: './TrailerDialogModal.html',
+  styles: [
+    `.close-button{
+        position: absolute;
+       top: -30px;
+        right: -24px;
+        padding: 0;
+        min-width: 40px;
+    }`
+  ]
+})
+export class TrailerDialogComponent {
+  constructor(public dialogRef: MdDialogRef<TrailerDialogComponent>, @Inject(MD_DIALOG_DATA) public data: any) {
+
+  }
 }

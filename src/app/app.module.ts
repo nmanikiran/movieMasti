@@ -10,14 +10,15 @@ import { MovieDBService } from './services/movie-db.service';
 import { AppComponent } from './app.component';
 import { PopularComponent } from './popular/popular.component';
 import { TopRatedComponent } from './top-rated/top-rated.component';
-import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { MovieDetailsComponent, TrailerDialogComponent } from './movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PopularComponent,
     TopRatedComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    TrailerDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +29,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     AppRoutingModule
   ],
   providers: [MovieDBService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [TrailerDialogComponent]
 })
 export class AppModule { }

@@ -22,8 +22,8 @@
           <md-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.videos">
           </md-progress-spinner>
           <div *ngFor="let video of movie.videos" class="movie-trailers">
-            <md-card>
-              <a [href]="video.url" target="_blank"><img [src]="video.imgUrl" alt=""></a>
+            <md-card (click)="openDialog(video)">
+              <a href="javascript:void(0)"><img [src]="video.imgUrl" alt=""></a>
             </md-card>
           </div>
         </md-tab>

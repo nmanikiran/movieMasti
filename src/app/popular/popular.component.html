@@ -1,0 +1,15 @@
+<div class="main-content">
+  <md-card class="example-card" *ngFor="let movie of movies" (click)="goToMovieDetails(movie)">
+    <img md-card-image [src]="movie.backdrop_path" class="card-img">
+    <md-card-content>
+      <h3 class="ellipsis" [title]="movie.title"> {{movie.title}}</h3>
+      <p>
+        {{movie.overview}}
+      </p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button (click)="$event.stopPropagation();"><md-icon>favorite</md-icon> LIKE</button>
+      <button md-button (click)="$event.stopPropagation();"><md-icon>share</md-icon> SHARE</button>
+    </md-card-actions>
+  </md-card>
+</div>

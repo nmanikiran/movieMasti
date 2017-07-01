@@ -1,0 +1,49 @@
+<div class="main-content">
+
+  <md-progress-bar *ngIf="!movie" class="example-margin" color="primary" mode="indeterminate"> </md-progress-bar>
+
+  <md-card *ngIf="movie" class="movie-details">
+    <md-card-content>
+      <!--<img [src]="movie.backdrop_path" alt="">-->
+      <div [style.background-image]="'url(' + movie.backdrop_path + ')'" class="movie-img"></div>
+      <md-tab-group (selectChange)="selectChange()" [(selectedIndex)]="index">
+        <md-tab label="Details">
+          <h4>{{movie.title}}</h4>
+
+          <p>{{movie.overview}}
+          </p>
+
+          <md-chip-list>
+            <md-chip *ngFor="let genre of movie.genres">{{genre.name}}</md-chip>
+          </md-chip-list>
+        </md-tab>
+
+        <md-tab label="Trailers">
+          <md-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.videos">
+          </md-progress-spinner>
+          <div *ngFor="let video of movie.videos" class="movie-trailers">
+            <md-card>
+              <a [href]="video.url" target="_blank"><img [src]="video.imgUrl" alt=""></a>
+            </md-card>
+          </div>
+        </md-tab>
+        <md-tab label="Reviews">
+          <p *ngIf="movie.reviews && movie.reviews.length == 0">
+            No Review Yet!
+          </p>
+          <md-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.reviews">
+          </md-progress-spinner>
+          <div *ngFor="let review of movie.reviews">
+            <h4>{{review.author}}</h4>
+            <p>{{review.content}}</p>
+            <hr>
+          </div>
+
+        </md-tab>
+      </md-tab-group>
+
+    </md-card-content>
+
+  </md-card>
+
+</div>

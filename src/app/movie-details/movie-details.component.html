@@ -1,49 +1,51 @@
 <div class="main-content">
 
-  <md-progress-bar *ngIf="!movie" class="example-margin" color="primary" mode="indeterminate"> </md-progress-bar>
+  <mat-progress-bar *ngIf="!movie" class="example-margin" color="primary" mode="indeterminate"> </mat-progress-bar>
 
-  <md-card *ngIf="movie" class="movie-details">
-    <md-card-content>
+  <mat-card *ngIf="movie" class="movie-details">
+    <mat-card-content>
       <!--<img [src]="movie.backdrop_path" alt="">-->
       <div [style.background-image]="'url(' + movie.backdrop_path + ')'" class="movie-img"></div>
-      <md-tab-group (selectChange)="selectChange()" [(selectedIndex)]="index">
-        <md-tab label="Details">
+      <mat-tab-group (selectChange)="selectChange()" [(selectedIndex)]="index">
+        <mat-tab label="Details">
           <h4>{{movie.title}}</h4>
 
           <p>{{movie.overview}}
           </p>
 
-          <md-chip-list>
-            <md-chip *ngFor="let genre of movie.genres">{{genre.name}}</md-chip>
-          </md-chip-list>
-        </md-tab>
+          <mat-chip-list>
+            <mat-chip *ngFor="let genre of movie.genres">{{genre.name}}</mat-chip>
+          </mat-chip-list>
+        </mat-tab>
 
-        <md-tab label="Trailers">
-          <md-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.videos">
-          </md-progress-spinner>
+        <mat-tab label="Trailers">
+          <mat-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.videos">
+          </mat-progress-spinner>
           <div *ngFor="let video of movie.videos" class="movie-trailers">
-            <md-card (click)="openDialog(video)">
-              <a href="javascript:void(0)"><img [src]="video.imgUrl" alt=""></a>
-            </md-card>
+            <mat-card (click)="openDialog(video)">
+              <a href="javascript:void(0)">
+                <img [src]="video.imgUrl" alt="">
+              </a>
+            </mat-card>
           </div>
-        </md-tab>
-        <md-tab label="Reviews">
+        </mat-tab>
+        <mat-tab label="Reviews">
           <p *ngIf="movie.reviews && movie.reviews.length == 0">
             No Review Yet!
           </p>
-          <md-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.reviews">
-          </md-progress-spinner>
+          <mat-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.reviews">
+          </mat-progress-spinner>
           <div *ngFor="let review of movie.reviews">
             <h4>{{review.author}}</h4>
             <p>{{review.content}}</p>
             <hr>
           </div>
 
-        </md-tab>
-      </md-tab-group>
+        </mat-tab>
+      </mat-tab-group>
 
-    </md-card-content>
+    </mat-card-content>
 
-  </md-card>
+  </mat-card>
 
 </div>

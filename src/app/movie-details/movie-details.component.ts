@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { MovieDBService } from '../services/movie-db.service';
+
 
 @Component({
   selector: 'app-movie-details',
@@ -17,7 +18,7 @@ export class MovieDetailsComponent implements OnInit {
   index: number;
 
   constructor(private route: ActivatedRoute,
-    private dbService: MovieDBService, public dialog: MdDialog,
+    private dbService: MovieDBService, public dialog: MatDialog,
     public domSanitizer: DomSanitizer) {
 
     this.domSanitizer = domSanitizer;
@@ -89,7 +90,7 @@ export class MovieDetailsComponent implements OnInit {
   ]
 })
 export class TrailerDialogComponent {
-  constructor(public dialogRef: MdDialogRef<TrailerDialogComponent>, @Inject(MD_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<TrailerDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
 
   }
 }

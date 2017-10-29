@@ -1,17 +1,18 @@
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { MaterialModule } from '@angular/material';
-import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
-
+import { CommonModule } from './commons/common.module';
 import { AppRoutingModule } from './app-routing.module';
-import { MovieDBService } from './services/movie-db.service';
 import { AppComponent } from './app.component';
-import { PopularComponent } from './popular/popular.component';
-import { TopRatedComponent } from './top-rated/top-rated.component';
-import { MovieDetailsComponent, TrailerDialogComponent } from './movie-details/movie-details.component';
 import { DiscoverComponent } from './discover/discover.component';
+import {
+  MovieDetailsComponent, TrailerDialogComponent
+} from './movie-details/movie-details.component';
+import { PopularComponent } from './popular/popular.component';
+import { MovieDBService } from './services/movie-db.service';
+import { TopRatedComponent } from './top-rated/top-rated.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { DiscoverComponent } from './discover/discover.component';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    MaterialModule,
+    CommonModule,
     AppRoutingModule
   ],
   providers: [MovieDBService],

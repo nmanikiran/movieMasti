@@ -3,38 +3,37 @@
   <h2>Discover New Movies & TV Shows</h2>
 
   <div class="discover-filters">
-
-    <md-select [(ngModel)]="options.primary_release_year" placeholder="Year" floatPlaceholder="never" (change)="getDiscover()">
-      <md-option *ngFor="let year of yearsList" [value]="year">{{year}}</md-option>
-    </md-select>
-    <md-select [(ngModel)]="options.sort_by" placeholder="Sory By" floatPlaceholder="never" (change)="getDiscover()">
-      <md-option *ngFor="let sort of sortByList" [value]="sort.key">{{sort.value}}</md-option>
-    </md-select>
-    <md-select multiple [(ngModel)]="options.with_genres" placeholder="Genres" floatPlaceholder="never" (change)="getDiscover()">
-      <md-option *ngFor="let genres of genresList" [value]="genres.id">{{genres.name}}</md-option>
-    </md-select>
-    <md-button-toggle-group #group="mdButtonToggleGroup" (change)="changeDiscoverType(group.value)" [value]="discoverType">
-      <md-button-toggle value="movie">
-        Movies
-      </md-button-toggle>
-      <md-button-toggle value="tv">
-        TV Shows
-      </md-button-toggle>
-    </md-button-toggle-group>
+    <mat-form-field>
+      <mat-select [(ngModel)]="options.primary_release_year" placeholder="Year" (change)="getDiscover()">
+        <mat-option *ngFor="let year of yearsList" [value]="year">{{year}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select [(ngModel)]="options.sort_by" placeholder="Sory By" (change)="getDiscover()">
+        <mat-option *ngFor="let sort of sortByList" [value]="sort.key">{{sort.value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select multiple [(ngModel)]="options.with_genres" placeholder="Genres" (change)="getDiscover()">
+        <mat-option *ngFor="let genres of genresList" [value]="genres.id">{{genres.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-button-toggle-group #group="matButtonToggleGroup" (change)="changeDiscoverType(group.value)" [value]="discoverType">
+      <mat-button-toggle value="movie"> Movies </mat-button-toggle>
+      <mat-button-toggle value="tv"> TV Shows </mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
-
 </div>
 
 <div class="main-content">
-  <md-card class="example-card" *ngFor="let item of itemList">
-    <img md-card-image [src]="item.backdrop_path" class="card-img">
-    <md-card-content>
-      <h3 class="ellipsis"> {{discoverType=='movie' ?item.title : item.name}}</h3>
+  <mat-card class="example-card" *ngFor="let item of itemList">
+    <img mat-card-image [src]="item.backdrop_path" class="card-img">
+    <mat-card-content>
+      <h3 class="ellipsis"> {{discoverType == 'movie' ? item.title : item.name}}</h3>
       <p>
         {{item.overview}}
       </p>
+    </mat-card-content>
 
-    </md-card-content>
-
-  </md-card>
+  </mat-card>
 </div>

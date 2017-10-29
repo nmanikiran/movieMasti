@@ -1,40 +1,40 @@
-<md-sidenav-container fullscreen>
-  <md-toolbar color="primary" class="fixed-header">
-    <button md-icon-button (click)="sideNav.open()">
-      <md-icon>menu</md-icon>
+<mat-sidenav-container fullscreen>
+  <mat-toolbar color="primary" class="fixed-header">
+    <button mat-icon-button (click)="sideNav.open()">
+      <mat-icon>view_headline</mat-icon>
     </button>
 
     <h3>{{title}}</h3>
 
-    <div class="nav-right" *ngIf="false">
-      <button md-icon-button [mdMenuTriggerFor]="menu">   <md-icon>more_vert</md-icon></button>
-      <md-menu #menu="mdMenu">
-        <button md-menu-item (click)="getMovies('popular')">
-          <md-icon>dialpad</md-icon>
+    <div class="nav-right">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
           <span>Popular</span>
         </button>
-        <button md-menu-item (click)="getMovies('top_rated')">
-          <md-icon>star</md-icon>
+        <button mat-menu-item>
+          <mat-icon>star</mat-icon>
           <span>Top Rated</span>
         </button>
-        <button md-menu-item (click)="getMovies('upcoming')">
-          <md-icon>notifications</md-icon>
+        <button mat-menu-item>
+          <mat-icon>notifications</mat-icon>
           <span>Upcoming</span>
         </button>
-      </md-menu>
+      </mat-menu>
     </div>
-  </md-toolbar>
-  
-  <md-sidenav #sideNav class="height">
-    <md-nav-list>
-      <a md-list-item [routerLink]="['/discover']" (click)="sideNav.close()">Discover</a>
-      <a md-list-item [routerLink]="['/popular']" (click)="sideNav.close()">Popular</a>
-      <a md-list-item [routerLink]="['/top-rated']" (click)="sideNav.close()">Top Rated</a>
+  </mat-toolbar>
 
-
-    </md-nav-list>
-  </md-sidenav>
+  <mat-sidenav #sideNav class="height">
+    <mat-list>
+      <a mat-list-item [routerLink]="['/discover']" (click)="sideNav.close()">Discover</a>
+      <a mat-list-item [routerLink]="['/popular']" (click)="sideNav.close()">Popular</a>
+      <a mat-list-item [routerLink]="['/top-rated']" (click)="sideNav.close()">Top Rated</a>
+    </mat-list>
+  </mat-sidenav>
 
   <router-outlet></router-outlet>
 
-</md-sidenav-container>
+</mat-sidenav-container>

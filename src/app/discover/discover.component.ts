@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieDBService } from '../services/movie-db.service';
+import { MatFormFieldControl } from '@angular/material';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
@@ -38,6 +39,7 @@ export class DiscoverComponent implements OnInit {
     ];
   }
 
+ 
   changeDiscoverType(type) {
     this.discoverType = type;
     this.getDiscover();

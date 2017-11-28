@@ -13,6 +13,8 @@ export class MovieDBService {
 
   constructor(private http: HttpClient) { }
 
+
+
   formatParams(options) {
     let params = new HttpParams().set('api_key', this.API_KEY)
       .set('language', 'en-US');
@@ -23,6 +25,15 @@ export class MovieDBService {
       });
     }
     return { params };
+  }
+
+  getYears(): Array<number> {
+    let year = new Date().getFullYear();
+    let yearList = [];
+    for (let i = 0; i < 25; i++) {
+      yearList.push(year - i);
+    }
+    return yearList;
   }
 
   getMovies(type): Observable<any[]> {

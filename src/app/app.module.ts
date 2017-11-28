@@ -12,6 +12,7 @@ import {
 import { MovieDBService } from './services/movie-db.service';
 import { TvShowsComponent } from './tv-shows/tv-shows.component';
 import { MoviesComponent } from './movies/movies.component';
+import { ReactionComponent } from './commons/components/reaction.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MoviesComponent } from './movies/movies.component';
     MovieDetailsComponent,
     TrailerDialogComponent,
     TvShowsComponent,
-    MoviesComponent
+    MoviesComponent,
+    ReactionComponent
   ],
   imports: [
     BrowserModule,

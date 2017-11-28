@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieDBService } from '../services/movie-db.service';
 import { MatFormFieldControl } from '@angular/material';
-
-import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/startWith';
+
+import { MovieDBService } from '../services/movie-db.service';
 
 @Component({
   selector: 'app-discover',

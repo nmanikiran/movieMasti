@@ -6,22 +6,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from './commons/common.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DiscoverComponent } from './discover/discover.component';
 import {
   MovieDetailsComponent, TrailerDialogComponent
 } from './movie-details/movie-details.component';
-import { PopularComponent } from './popular/popular.component';
 import { MovieDBService } from './services/movie-db.service';
-import { TopRatedComponent } from './top-rated/top-rated.component';
+import { TvShowsComponent } from './tv-shows/tv-shows.component';
+import { MoviesComponent } from './movies/movies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PopularComponent,
-    TopRatedComponent,
     MovieDetailsComponent,
     TrailerDialogComponent,
-    DiscoverComponent
+    TvShowsComponent,
+    MoviesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,29 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { MatFormFieldControl } from '@angular/material';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/startWith';
 
 import { MovieDBService } from '../services/movie-db.service';
 
 @Component({
-  selector: 'app-discover',
-  templateUrl: './discover.component.html',
-  styleUrls: ['./discover.component.css']
+  selector: 'app-movies',
+  templateUrl: './movies.component.html',
+  styleUrls: ['./movies.component.css']
 })
-export class DiscoverComponent implements OnInit {
+export class MoviesComponent implements OnInit {
 
   yearsList: Number[];
   sortByList: any;
   genresList: any;
   options: any;
   itemList: any;
-  discoverType: String;
 
-  constructor(public DBService: MovieDBService) {
+  constructor(private titleService: Title, public DBService: MovieDBService, private router: Router, ) {
     this.DBService.getGenres().subscribe((res: any) => this.genresList = res.genres);
     this.options = {};
-    this.discoverType = 'movie'
     this.getDiscover();
+    this.titleService.setTitle('Discover New Movies');
   }
 
   ngOnInit() {
@@ -39,14 +40,8 @@ export class DiscoverComponent implements OnInit {
     ];
   }
 
- 
-  changeDiscoverType(type) {
-    this.discoverType = type;
-    this.getDiscover();
-  }
-
   getDiscover() {
-    this.DBService.getDiscover(this.discoverType, this.options).subscribe((res: any) => {
+    this.DBService.getDiscover('movie', this.options).subscribe((res: any) => {
       const placeholderImg = 'http://via.placeholder.com/500x281?text=MovieMasti';
       this.itemList = res.results.map(item => {
         item.poster_path = item.poster_path ? `http://image.tmdb.org/t/p/w500/${item.poster_path}` : placeholderImg;
@@ -57,21 +52,12 @@ export class DiscoverComponent implements OnInit {
     });
   }
 
+  goToMovieDetails(movie) {
+    this.router.navigate(['/movie', movie.id]);
+  }
+
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

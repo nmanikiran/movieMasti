@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PopularComponent } from './popular/popular.component';
-import { TopRatedComponent } from './top-rated/top-rated.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
-import { DiscoverComponent } from 'app/discover/discover.component';
+import { MoviesComponent } from './movies/movies.component';
+import { TvShowsComponent } from './tv-shows/tv-shows.component';
 
 const routes: Routes = [
-  { path: '', component: DiscoverComponent },
-  { path: 'popular', component: PopularComponent },
-  { path: 'discover', component: DiscoverComponent },
-  { path: 'top-rated', component: TopRatedComponent },
+  { path: '', component: MoviesComponent },
+  { path: 'movies', component: MoviesComponent },
+  { path: 'tv-shows', component: TvShowsComponent },
   { path: 'movie/:id', component: MovieDetailsComponent }
 ];
 

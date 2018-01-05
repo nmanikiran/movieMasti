@@ -13,8 +13,6 @@ export class MovieDBService {
 
   constructor(private http: HttpClient) { }
 
-
-
   formatParams(options) {
     let params = new HttpParams().set('api_key', this.API_KEY)
       .set('language', 'en-US');
@@ -38,30 +36,34 @@ export class MovieDBService {
 
   getMovies(type): Observable<any[]> {
     type = type || 'popular';
-    return this.http.get(`${this.API_BASE}movie/${type}`, this.formatParams({})).map(function (res: Response) {
-      return res;
-    }).catch(this.handleError);
+    return this.http.get(`${this.API_BASE}movie/${type}`, this.formatParams({}))
+      .map(function (res: Response) {
+        return res;
+      }).catch(this.handleError);
   }
 
   getMovieDetails(movieId): Observable<any[]> {
     const movieDetilasUrl = `${this.API_BASE}movie/${movieId}`;
-    return this.http.get(movieDetilasUrl, this.formatParams({})).map(function (res: Response) {
-      return res;
-    }).catch(this.handleError);
+    return this.http.get(movieDetilasUrl, this.formatParams({}))
+      .map(function (res: Response) {
+        return res;
+      }).catch(this.handleError);
   }
 
   getMovieVideos(movieId): Observable<any[]> {
     const movieTrailersUrl = `${this.API_BASE}movie/${movieId}/videos`;
-    return this.http.get(movieTrailersUrl, this.formatParams({})).map((res: Response) => {
-      return res;
-    }).catch(this.handleError);
+    return this.http.get(movieTrailersUrl, this.formatParams({}))
+      .map((res: Response) => {
+        return res;
+      }).catch(this.handleError);
   }
 
   getMovieReviews(movieId): Observable<any[]> {
     const movieReviewUrl = `${this.API_BASE}movie/${movieId}/reviews`;
-    return this.http.get(movieReviewUrl, this.formatParams({})).map((res: Response) => {
-      return res;
-    }).catch(this.handleError);
+    return this.http.get(movieReviewUrl, this.formatParams({}))
+      .map((res: Response) => {
+        return res;
+      }).catch(this.handleError);
   }
 
   getGenres(): Observable<any[]> {

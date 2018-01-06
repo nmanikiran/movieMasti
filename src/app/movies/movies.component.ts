@@ -20,7 +20,9 @@ export class MoviesComponent implements OnInit {
   options: any;
   itemList: any;
 
-  constructor(private titleService: Title, public DBService: MovieDBService, private router: Router, ) {
+  constructor(private titleService: Title,
+    public DBService: MovieDBService,
+    private router: Router, ) {
     this.DBService.getGenres().subscribe((res: any) => this.genresList = res.genres);
     this.options = {};
     this.getDiscover();
@@ -31,8 +33,10 @@ export class MoviesComponent implements OnInit {
     this.yearsList = this.DBService.getYears();
 
     this.sortByList = [
-      { key: 'popularity.desc', value: 'Popularity Descending' }, { key: 'popularity.asc', value: 'Popularity Ascending' },
-      { key: 'vote_count.asc', value: 'Rating Ascending' }, { key: 'vote_count.desc', value: 'Rating Descending' },
+      { key: 'popularity.desc', value: 'Popularity Descending' },
+      { key: 'popularity.asc', value: 'Popularity Ascending' },
+      { key: 'vote_count.asc', value: 'Rating Ascending' },
+      { key: 'vote_count.desc', value: 'Rating Descending' },
       { key: 'primary_release_date.desc', value: 'Release Date Descending' },
       { key: 'primary_release_date.asc', value: 'Release Date Ascending' }
     ];
@@ -41,15 +45,20 @@ export class MoviesComponent implements OnInit {
   getDiscover() {
     this.DBService.getDiscover('movie', this.options).subscribe((res: any) => {
       const placeholderImg = 'http://via.placeholder.com/500x281?text=MovieMasti';
+      const imgUrl = `http://image.tmdb.org/t/p/w500`;
       this.itemList = res.results.map(item => {
-        item.poster_path = item.poster_path ? `http://image.tmdb.org/t/p/w500/${item.poster_path}` : placeholderImg;
-        item.backdrop_path = item.backdrop_path ? `http://image.tmdb.org/t/p/w500/${item.backdrop_path}` : placeholderImg;
+        item.poster_path = item.poster_path ? `${imgUrl}/${item.poster_path}` : placeholderImg;
+        item.backdrop_path = item.backdrop_path ? `${imgUrl}/${item.backdrop_path}` : placeholderImg;
         item.overview = item.overview.substr(0, 100) + '...';
         return item;
       });
     });
   }
 
+  like(e, movie) {
+    e.stopPropagation();
+    alert(movie.title)
+  }
   goToMovieDetails(movie) {
     this.router.navigate(['/movie', movie.id]);
   }

@@ -31,8 +31,11 @@
         {{movie.overview}}
       </p>
     </mat-card-content>
-    <mat-card-footer>
-      <a mat-raised-button href="javascript:void(0)">Link</a>
-    </mat-card-footer>
+    <mat-card-actions align="start">
+      <a mat-raised-button (click)="like($event, movie)">
+        <i class="material-icons">favorite_border</i> Like</a>
+      <a mat-raised-button [routerLink]="['/movie', movie.id]">
+        <i class="material-icons">format_list_bulleted</i> View more</a>
+    </mat-card-actions>
   </mat-card>
 </div>

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatFormFieldControl } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/startWith';
+import { map, startWith } from 'rxjs/operators';
 
 import { MovieDBService } from '../services/movie-db.service';
 
@@ -13,17 +12,20 @@ import { MovieDBService } from '../services/movie-db.service';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
-
   yearsList: Number[];
   sortByList: any;
   genresList: any;
   options: any;
   itemList: any;
 
-  constructor(private titleService: Title,
+  constructor(
+    private titleService: Title,
     public DBService: MovieDBService,
-    private router: Router, ) {
-    this.DBService.getGenres().subscribe((res: any) => this.genresList = res.genres);
+    private router: Router
+  ) {
+    this.DBService.getGenres().subscribe(
+      (res: any) => (this.genresList = res.genres)
+    );
     this.options = {};
     this.getDiscover();
     this.titleService.setTitle('Discover New Movies');
@@ -44,11 +46,16 @@ export class MoviesComponent implements OnInit {
 
   getDiscover() {
     this.DBService.getDiscover('movie', this.options).subscribe((res: any) => {
-      const placeholderImg = 'http://via.placeholder.com/500x281?text=MovieMasti';
+      const placeholderImg =
+        'http://via.placeholder.com/500x281?text=MovieMasti';
       const imgUrl = `http://image.tmdb.org/t/p/w500`;
       this.itemList = res.results.map(item => {
-        item.poster_path = item.poster_path ? `${imgUrl}/${item.poster_path}` : placeholderImg;
-        item.backdrop_path = item.backdrop_path ? `${imgUrl}/${item.backdrop_path}` : placeholderImg;
+        item.poster_path = item.poster_path
+          ? `${imgUrl}/${item.poster_path}`
+          : placeholderImg;
+        item.backdrop_path = item.backdrop_path
+          ? `${imgUrl}/${item.backdrop_path}`
+          : placeholderImg;
         item.overview = item.overview.substr(0, 100) + '...';
         return item;
       });
@@ -57,21 +64,12 @@ export class MoviesComponent implements OnInit {
 
   like(e, movie) {
     e.stopPropagation();
-    alert(movie.title)
+    alert(movie.title);
   }
   goToMovieDetails(movie) {
     this.router.navigate(['/movie', movie.id]);
   }
-
-
 }
-
-
-
-
-
-
-
 
 // { key: 'revenue.asc', value: '' }, { key: 'revenue.desc', value: '' },
 //       { key: 'release_date.asc', value: '' }, { key: 'release_date.desc', value: '' },

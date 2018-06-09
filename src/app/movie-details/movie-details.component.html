@@ -6,7 +6,7 @@
     <mat-card-content>
       <!--<img [src]="movie.backdrop_path" alt="">-->
       <div [style.background-image]="'url(' + movie.backdrop_path + ')'" class="movie-img"></div>
-      <mat-tab-group (selectChange)="selectChange()" [(selectedIndex)]="index">
+      <mat-tab-group (selectedIndexChange)="selectChange($event)" [(selectedIndex)]="index">
         <mat-tab label="Details">
           <h4>{{movie.title}}</h4>
 

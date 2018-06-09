@@ -1,10 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { MovieDBService } from '../services/movie-db.service';
-
 
 @Component({
   selector: 'app-movie-details',
@@ -12,15 +11,16 @@ import { MovieDBService } from '../services/movie-db.service';
   styleUrls: ['./movie-details.component.css']
 })
 export class MovieDetailsComponent implements OnInit {
-
   movieId: string;
   movie: any;
   index: number;
 
-  constructor(private route: ActivatedRoute,
-    private dbService: MovieDBService, public dialog: MatDialog,
-    public domSanitizer: DomSanitizer) {
-
+  constructor(
+    private route: ActivatedRoute,
+    private dbService: MovieDBService,
+    public dialog: MatDialog,
+    public domSanitizer: DomSanitizer
+  ) {
     this.domSanitizer = domSanitizer;
     this.movieId = route.snapshot.paramMap.get('id');
   }
@@ -32,13 +32,19 @@ export class MovieDetailsComponent implements OnInit {
   getMovieDetails(id) {
     this.dbService.getMovieDetails(id).subscribe((res: any) => {
       this.movie = res;
-      this.movie.poster_path = `http://image.tmdb.org/t/p/w500/${this.movie.poster_path}`;
-      this.movie.backdrop_path = `http://image.tmdb.org/t/p/original/${this.movie.backdrop_path}`;
+      this.movie.poster_path = `http://image.tmdb.org/t/p/w500/${
+        this.movie.poster_path
+      }`;
+      this.movie.backdrop_path = `http://image.tmdb.org/t/p/original/${
+        this.movie.backdrop_path
+      }`;
     });
   }
 
   getMovieVideos(): void {
-    if (this.movie.videos && this.movie.videos.length) { return };
+    if (this.movie.videos && this.movie.videos.length) {
+      return;
+    }
 
     this.dbService.getMovieVideos(this.movieId).subscribe((res: any) => {
       this.movie.videos = res.results.map(video => {
@@ -46,28 +52,34 @@ export class MovieDetailsComponent implements OnInit {
         video.url = `https://www.youtube.com/watch?v=${video.key}`;
         return video;
       });
-    })
+    });
   }
 
   getMovieReviews(): void {
-    if (this.movie.reviews && this.movie.reviews.length) { return };
+    if (this.movie.reviews && this.movie.reviews.length) {
+      return;
+    }
 
     this.dbService.getMovieReviews(this.movieId).subscribe((res: any) => {
       this.movie.reviews = res.results || [];
-    })
+    });
   }
 
-  selectChange() {
-    if (this.index === 1) {
+  selectChange(event: number) {
+    if (event === 1) {
       this.getMovieVideos();
-    } else if (this.index === 2) {
+    } else if (event === 2) {
       this.getMovieReviews();
     }
   }
 
   openDialog(video) {
-    const videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${video.key}?autoplay=1`);
-    const dialogRef = this.dialog.open(TrailerDialogComponent, { data: { videoUrl: videoUrl } });
+    const videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.youtube.com/embed/${video.key}?autoplay=1`
+    );
+    const dialogRef = this.dialog.open(TrailerDialogComponent, {
+      data: { videoUrl: videoUrl }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
@@ -90,7 +102,8 @@ export class MovieDetailsComponent implements OnInit {
   ]
 })
 export class TrailerDialogComponent {
-  constructor(public dialogRef: MatDialogRef<TrailerDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-
-  }
+  constructor(
+    public dialogRef: MatDialogRef<TrailerDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 }

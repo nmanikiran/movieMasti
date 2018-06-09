@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatFormFieldControl } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { MovieDBService } from 'app/services/movie-db.service';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/startWith';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tv-shows',

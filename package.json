@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-github": "ng build --prod --env=prod --bh /movieMasti/",
+    "build-github": "ng build --prod --base-href /movieMasti/",
     "deploy-gh-pages": "git subtree push --prefix dist origin gh-pages"
   },
   "private": true,

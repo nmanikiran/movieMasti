@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-github": "ng build --prod --base-href /movieMasti/",
-    "deploy-gh-pages": "git subtree push --prefix dist origin gh-pages"
+    "deploy-gh-pages":"git subtree split --prefix dist -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages"
   },
   "private": true,
   "dependencies": {

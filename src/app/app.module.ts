@@ -5,13 +5,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CommonModule } from './commons/common.module';
+import { SharedModule } from './shared/shared.module';
 import {
-    MovieDetailsComponent, TrailerDialogComponent
+  MovieDetailsComponent,
+  TrailerDialogComponent
 } from './movie-details/movie-details.component';
 import { MoviesComponent } from './movies/movies.component';
 import { MovieDBService } from './services/movie-db.service';
 import { TvShowsComponent } from './tv-shows/tv-shows.component';
+import { FilterComponent } from './shared/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -19,18 +21,19 @@ import { TvShowsComponent } from './tv-shows/tv-shows.component';
     MovieDetailsComponent,
     TrailerDialogComponent,
     TvShowsComponent,
-    MoviesComponent
+    MoviesComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    CommonModule,
+    SharedModule,
     AppRoutingModule
   ],
   providers: [MovieDBService],
   bootstrap: [AppComponent],
   entryComponents: [TrailerDialogComponent]
 })
-export class AppModule { }
+export class AppModule {}

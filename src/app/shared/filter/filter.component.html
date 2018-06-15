@@ -1,0 +1,18 @@
+<div class="discover-filters">
+  <mat-form-field>
+    <mat-select [(ngModel)]="options.primary_release_year" placeholder="Year" (selectionChange)="changeSelection()">
+      <mat-option *ngFor="let year of yearsList" [value]="year">{{year}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select [(ngModel)]="options.sort_by" placeholder="Sory By" (selectionChange)="changeSelection()">
+      <mat-option *ngFor="let sort of sortByList" [value]="sort.key">{{sort.value}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select multiple [(ngModel)]="options.with_genres" placeholder="Genres" (selectionChange)="changeSelection()">
+      <mat-option *ngFor="let genres of genresList" [value]="genres.id">{{genres.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>

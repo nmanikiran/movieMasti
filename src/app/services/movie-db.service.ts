@@ -24,6 +24,16 @@ export class MovieDBService {
     }
     return { params };
   }
+  sortByList(): Array<any> {
+    return [
+      { key: 'popularity.desc', value: 'Popularity Descending' },
+      { key: 'popularity.asc', value: 'Popularity Ascending' },
+      { key: 'vote_count.asc', value: 'Rating Ascending' },
+      { key: 'vote_count.desc', value: 'Rating Descending' },
+      { key: 'primary_release_date.desc', value: 'Release Date Descending' },
+      { key: 'primary_release_date.asc', value: 'Release Date Ascending' }
+    ];
+  }
 
   getYears(): Array<number> {
     let year = new Date().getFullYear();
@@ -38,35 +48,42 @@ export class MovieDBService {
     type = type || 'popular';
     return this.http
       .get(`${this.API_BASE}movie/${type}`, this.formatParams({}))
-      .pipe(map((res: Response) => res), catchError(this.handleError));
+      .pipe(
+        map((res: Response) => res),
+        catchError(this.handleError)
+      );
   }
 
   getMovieDetails(movieId): Observable<Response> {
     const movieDetilasUrl = `${this.API_BASE}movie/${movieId}`;
-    return this.http
-      .get(movieDetilasUrl, this.formatParams({}))
-      .pipe(map((res: Response) => res), catchError(this.handleError));
+    return this.http.get(movieDetilasUrl, this.formatParams({})).pipe(
+      map((res: Response) => res),
+      catchError(this.handleError)
+    );
   }
 
   getMovieVideos(movieId): Observable<Response> {
     const movieTrailersUrl = `${this.API_BASE}movie/${movieId}/videos`;
-    return this.http
-      .get(movieTrailersUrl, this.formatParams({}))
-      .pipe(map((res: Response) => res), catchError(this.handleError));
+    return this.http.get(movieTrailersUrl, this.formatParams({})).pipe(
+      map((res: Response) => res),
+      catchError(this.handleError)
+    );
   }
 
   getMovieReviews(movieId): Observable<Response> {
     const movieReviewUrl = `${this.API_BASE}movie/${movieId}/reviews`;
-    return this.http
-      .get(movieReviewUrl, this.formatParams({}))
-      .pipe(map((res: Response) => res), catchError(this.handleError));
+    return this.http.get(movieReviewUrl, this.formatParams({})).pipe(
+      map((res: Response) => res),
+      catchError(this.handleError)
+    );
   }
 
   getGenres(): Observable<Response> {
     const generesUrl = `${this.API_BASE}genre/movie/list`;
-    return this.http
-      .get(generesUrl, this.formatParams({}))
-      .pipe(map((res: Response) => res), catchError(this.handleError));
+    return this.http.get(generesUrl, this.formatParams({})).pipe(
+      map((res: Response) => res),
+      catchError(this.handleError)
+    );
   }
 
   getkeywords(val): Observable<Response> {
@@ -74,17 +91,33 @@ export class MovieDBService {
       this.API_KEY
     }&query=${val}&page=1`;
 
-    return this.http
-      .get(generesUrl)
-      .pipe(map((res: Response) => res), catchError(this.handleError));
+    return this.http.get(generesUrl).pipe(
+      map((res: Response) => res),
+      catchError(this.handleError)
+    );
   }
 
   getDiscover(type, options): Observable<Response> {
     options.api_key = this.API_KEY;
     const discoverUrl = `${this.API_BASE}discover/${type}`;
-    return this.http
-      .get(discoverUrl, this.formatParams(options))
-      .pipe(map((res: Response) => res), catchError(this.handleError));
+    return this.http.get(discoverUrl, this.formatParams(options)).pipe(
+      map((res: any) => {
+        const placeholderImg =
+          'http://via.placeholder.com/500x281?text=MovieMasti';
+        const imgUrl = `http://image.tmdb.org/t/p/w500`;
+        return res.results.map(item => {
+          item.poster_path = item.poster_path
+            ? `${imgUrl}/${item.poster_path}`
+            : placeholderImg;
+          item.backdrop_path = item.backdrop_path
+            ? `${imgUrl}/${item.backdrop_path}`
+            : placeholderImg;
+          item.overview = item.overview.substr(0, 100) + '...';
+          return item;
+        });
+      }),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: Response | any) {

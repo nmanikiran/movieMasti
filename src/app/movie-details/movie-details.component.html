@@ -10,8 +10,7 @@
         <mat-tab label="Details">
           <h4>{{movie.title}}</h4>
 
-          <p>{{movie.overview}}
-          </p>
+          <p>{{movie.overview}}</p>
 
           <mat-chip-list>
             <mat-chip *ngFor="let genre of movie.genres">{{genre.name}}</mat-chip>
@@ -24,7 +23,7 @@
           <div *ngFor="let video of movie.videos" class="movie-trailers">
             <mat-card (click)="openDialog(video)">
               <a href="javascript:void(0)">
-                <img [src]="video.imgUrl" alt="">
+                <img [src]="video.imgUrl" [alt]="movie.title">
               </a>
             </mat-card>
           </div>

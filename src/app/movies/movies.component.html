@@ -7,7 +7,7 @@
 
 <div class="main-content">
   <mat-card class="example-card" *ngFor="let movie of itemList" (click)="goToMovieDetails(movie)">
-    <img mat-card-image [src]="movie.backdrop_path" class="card-img">
+    <img mat-card-image [src]="movie.backdrop_path" class="card-img" [alt]="movie.title">
     <mat-card-content>
       <h3 class="ellipsis"> {{ movie.title}}</h3>
       <p>
@@ -15,9 +15,9 @@
       </p>
     </mat-card-content>
     <mat-card-actions align="start">
-      <a mat-raised-button (click)="like($event, movie)">
+      <a mat-raised-button (click)="like($event, movie)" role="like">
         <i class="material-icons">favorite_border</i> Like</a>
-      <a mat-raised-button [routerLink]="['/movie', movie.id]">
+      <a mat-raised-button [routerLink]="['/movie', movie.id]" role="details">
         <i class="material-icons">format_list_bulleted</i> View more</a>
     </mat-card-actions>
   </mat-card>

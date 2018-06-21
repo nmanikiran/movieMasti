@@ -14,6 +14,8 @@ import { MoviesComponent } from './movies/movies.component';
 import { MovieDBService } from './services/movie-db.service';
 import { TvShowsComponent } from './tv-shows/tv-shows.component';
 import { FilterComponent } from './shared/filter/filter.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { FilterComponent } from './shared/filter/filter.component';
     FormsModule,
     HttpClientModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [MovieDBService],
   bootstrap: [AppComponent],

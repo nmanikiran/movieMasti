@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-
+import { environment } from 'environments/environment';
 @Injectable()
 export class MovieDBService {
-  API_BASE = 'https://api.themoviedb.org/3/';
-  API_KEY = 'e98136de756705459104be0a2c27f514';
+  API_BASE = environment.API_BASE;
+  API_KEY = environment.API_KEY;
   body: any;
   err: any;
 
@@ -36,8 +36,8 @@ export class MovieDBService {
   }
 
   getYears(): Array<number> {
-    let year = new Date().getFullYear();
-    let yearList = [];
+    const year = new Date().getFullYear();
+    const yearList = [];
     for (let i = 0; i < 25; i++) {
       yearList.push(year - i);
     }
@@ -102,9 +102,8 @@ export class MovieDBService {
     const discoverUrl = `${this.API_BASE}discover/${type}`;
     return this.http.get(discoverUrl, this.formatParams(options)).pipe(
       map((res: any) => {
-        const placeholderImg =
-          'http://via.placeholder.com/500x281?text=MovieMasti';
-        const imgUrl = `http://image.tmdb.org/t/p/w500`;
+        const placeholderImg = environment.placeholderImg;
+        const imgUrl = environment.imgUrl;
         return res.results.map(item => {
           item.poster_path = item.poster_path
             ? `${imgUrl}${item.poster_path}`

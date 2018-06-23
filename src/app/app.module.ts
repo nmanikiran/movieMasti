@@ -33,7 +33,7 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     SharedModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [MovieDBService],
   bootstrap: [AppComponent],

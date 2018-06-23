@@ -107,10 +107,10 @@ export class MovieDBService {
         const imgUrl = `http://image.tmdb.org/t/p/w500`;
         return res.results.map(item => {
           item.poster_path = item.poster_path
-            ? `${imgUrl}/${item.poster_path}`
+            ? `${imgUrl}${item.poster_path}`
             : placeholderImg;
           item.backdrop_path = item.backdrop_path
-            ? `${imgUrl}/${item.backdrop_path}`
+            ? `${imgUrl}${item.backdrop_path}`
             : placeholderImg;
           item.overview = item.overview.substr(0, 100) + '...';
           return item;

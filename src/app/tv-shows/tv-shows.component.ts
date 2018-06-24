@@ -2,7 +2,7 @@ import { MovieDBService } from 'app/services/movie-db.service';
 import { Component, OnInit } from '@angular/core';
 import { MatFormFieldControl } from '@angular/material';
 import { Title } from '@angular/platform-browser';
-
+import { environment } from 'environments/environment';
 @Component({
   selector: 'app-tv-shows',
   templateUrl: './tv-shows.component.html',
@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class TvShowsComponent implements OnInit {
   itemList: any;
-
+  defaultImage = environment.placeholderImg;
   constructor(private titleService: Title, public DBService: MovieDBService) {
     this.getDiscover({});
     this.titleService.setTitle('Discover Tv Shows');

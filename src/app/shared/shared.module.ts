@@ -1,46 +1,26 @@
-import { NgModule } from '@angular/core';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-
 import {
-  MatCommonModule,
-  MatMenuModule,
-  MatSidenavModule,
-  MatTabsModule,
-  MatChipsModule,
-  MatProgressSpinnerModule,
-  MatProgressBarModule,
-  MatSelectModule,
+  MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
-  MatToolbarModule,
+  MatChipsModule,
+  MatCommonModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
+  MatInputModule,
   MatListModule,
-  MatButtonModule,
-  MatDialogModule
+  MatMenuModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatTabsModule,
+  MatToolbarModule
 } from '@angular/material';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   imports: [
-    InfiniteScrollModule,
-    MatCommonModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatTabsModule,
-    MatChipsModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
-    MatSelectModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatListModule,
-    MatButtonModule
-  ],
-  exports: [
-    InfiniteScrollModule,
     MatCommonModule,
     MatMenuModule,
     MatSidenavModule,
@@ -56,8 +36,29 @@ import {
     MatIconModule,
     MatListModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule
   ],
-  providers: []
+  exports: [
+    MatCommonModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatSelectModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule
+  ],
+  providers: [],
+  declarations: []
 })
 export class SharedModule {}

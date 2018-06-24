@@ -1,30 +1,46 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserModule,
+  HAMMER_GESTURE_CONFIG,
+  HammerGestureConfig
+} from '@angular/platform-browser';
+import { environment } from '../environments/environment';
+import { FilterComponent } from './shared/filter/filter.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { MovieDBService } from './services/movie-db.service';
 import {
   MovieDetailsComponent,
   TrailerDialogComponent
 } from './movie-details/movie-details.component';
 import { MoviesComponent } from './movies/movies.component';
-import { MovieDBService } from './services/movie-db.service';
-import { TvShowsComponent } from './tv-shows/tv-shows.component';
-import { FilterComponent } from './shared/filter/filter.component';
+import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { SharedModule } from './shared/shared.module';
+import { SwService } from './services/sw.service';
+import { TvShowsComponent } from './tv-shows/tv-shows.component';
+import { SocialShareComponent } from './shared/social-share/social-share.component';
+import { FooterComponent } from './shared/footer/footer.component';
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any>{
+    pinch: { enable: false },
+    rotate: { enable: false }
+  };
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieDetailsComponent,
     TrailerDialogComponent,
+    SocialShareComponent,
     TvShowsComponent,
     MoviesComponent,
-    FilterComponent
+    FilterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -33,10 +49,17 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     SharedModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    LazyLoadImageModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production
+    })
   ],
-  providers: [MovieDBService],
+  providers: [
+    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
+    MovieDBService,
+    SwService
+  ],
   bootstrap: [AppComponent],
-  entryComponents: [TrailerDialogComponent]
+  entryComponents: [TrailerDialogComponent, SocialShareComponent]
 })
 export class AppModule {}

@@ -25,17 +25,20 @@
     flex-flow: row wrap;
 }
 
+
+
 .ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
     white-space: nowrap;
-    display: block
+    display: block;
 }
 
 .example-card {
     width: 350px;
     margin: 10px;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -49,7 +52,7 @@
     }
 }
 
-@media (min-width: 360px) {
+@media (max-width: 720px) {
     body {
         font-size: 1em;
     }

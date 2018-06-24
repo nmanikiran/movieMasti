@@ -97,24 +97,46 @@ export class MovieDBService {
     );
   }
 
+  private formatMovies(res: Response) {
+    const placeholderImg = environment.placeholderImg;
+    const imgUrl = environment.imgUrl;
+    return res['results'].map(item => {
+      if (item) {
+        item.poster_path = item.poster_path
+          ? `${imgUrl}${item.poster_path}`
+          : placeholderImg;
+        item.backdrop_path = item.backdrop_path
+          ? `${imgUrl}${item.backdrop_path}`
+          : placeholderImg;
+        item.overview = item.overview.substr(0, 100) + '...';
+        return item;
+      }
+    });
+  }
+
+  getSimilarMovies(movie_id): Observable<Response> {
+    const similarMovieUrl = `${this.API_BASE}movie/${movie_id}/similar`;
+    return this.http.get(similarMovieUrl, this.formatParams({})).pipe(
+      map(this.formatMovies),
+      catchError(this.handleError)
+    );
+  }
+
+  getCastMovie(movie_id): Observable<Response> {
+    const castUrl = `${this.API_BASE}movie/${movie_id}/credits?api_key=${
+      this.API_KEY
+    }`;
+    return this.http.get(castUrl).pipe(
+      map((res: Response) => res),
+      catchError(this.handleError)
+    );
+  }
+
   getDiscover(type, options): Observable<Response> {
-    options.api_key = this.API_KEY;
+    // options.api_key = this.API_KEY;
     const discoverUrl = `${this.API_BASE}discover/${type}`;
     return this.http.get(discoverUrl, this.formatParams(options)).pipe(
-      map((res: any) => {
-        const placeholderImg = environment.placeholderImg;
-        const imgUrl = environment.imgUrl;
-        return res.results.map(item => {
-          item.poster_path = item.poster_path
-            ? `${imgUrl}${item.poster_path}`
-            : placeholderImg;
-          item.backdrop_path = item.backdrop_path
-            ? `${imgUrl}${item.backdrop_path}`
-            : placeholderImg;
-          item.overview = item.overview.substr(0, 100) + '...';
-          return item;
-        });
-      }),
+      map(this.formatMovies),
       catchError(this.handleError)
     );
   }

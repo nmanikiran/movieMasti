@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
-
+import { DomSanitizer, Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'environments/environment';
+import { Location } from '@angular/common';
 import { MovieDBService } from '../services/movie-db.service';
-
+import { SocialShareComponent } from './../shared/social-share/social-share.component';
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
@@ -13,31 +14,47 @@ import { MovieDBService } from '../services/movie-db.service';
 export class MovieDetailsComponent implements OnInit {
   movieId: string;
   movie: any;
-  index: number;
 
   constructor(
     private route: ActivatedRoute,
     private dbService: MovieDBService,
     public dialog: MatDialog,
-    public domSanitizer: DomSanitizer
+    public domSanitizer: DomSanitizer,
+    private titleService: Title,
+    private location: Location,
+    private router: Router
   ) {
     this.domSanitizer = domSanitizer;
-    this.movieId = route.snapshot.paramMap.get('id');
+    this.route.params.subscribe(params => {
+      this.movieId = params['id'];
+      this.getMovieDetails(this.movieId);
+    });
   }
 
-  ngOnInit() {
-    this.getMovieDetails(this.movieId);
-  }
+  ngOnInit() {}
 
   getMovieDetails(id) {
     this.dbService.getMovieDetails(id).subscribe((res: any) => {
       this.movie = res;
-      this.movie.poster_path = `http://image.tmdb.org/t/p/w500/${
-        this.movie.poster_path
-      }`;
+      this.getCast();
+      this.titleService.setTitle(res.title);
+      this.movie.poster_path = `${environment.imgUrl}${this.movie.poster_path}`;
       this.movie.backdrop_path = `http://image.tmdb.org/t/p/original/${
         this.movie.backdrop_path
       }`;
+    });
+  }
+
+  goToMovieDetails(movie) {
+    this.router.navigate(['/movie', movie.id]);
+  }
+
+  getCast() {
+    this.dbService.getCastMovie(this.movieId).subscribe(res => {
+      this.movie.cast = res['cast'].slice(0, 10).map(cast => {
+        cast.imgUrl = `${environment.imgUrl}${cast.profile_path}`;
+        return cast;
+      });
     });
   }
 
@@ -65,11 +82,24 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
+  similarMovies(): any {
+    if (this.movie.similarMovies && this.movie.similarMovies.length) {
+      return;
+    }
+    if (this.movieId) {
+      this.dbService.getSimilarMovies(this.movieId).subscribe((res: any) => {
+        this.movie.similarMovies = res || [];
+      });
+    }
+  }
+
   selectChange(event: number) {
     if (event === 1) {
       this.getMovieVideos();
     } else if (event === 2) {
       this.getMovieReviews();
+    } else if (event === 3) {
+      this.similarMovies();
     }
   }
 
@@ -85,6 +115,23 @@ export class MovieDetailsComponent implements OnInit {
       console.log(result);
     });
   }
+
+  openShare(video) {
+    const width = window.innerWidth > 720 ? '50%' : '90%';
+    const dialogRef = this.dialog.open(SocialShareComponent, {
+      data: { movie: this.movie },
+      width: width,
+      height: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  back() {
+    this.location.back();
+  }
 }
 
 @Component({
@@ -92,13 +139,15 @@ export class MovieDetailsComponent implements OnInit {
   selector: 'trailer-modal-dialog',
   templateUrl: './TrailerDialogModal.html',
   styles: [
-    `.close-button{
+    `
+      .close-button {
         position: absolute;
-       top: -30px;
+        top: -30px;
         right: -24px;
         padding: 0;
         min-width: 40px;
-    }`
+      }
+    `
   ]
 })
 export class TrailerDialogComponent {

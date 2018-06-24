@@ -1,50 +1,75 @@
-<div class="main-content">
+<div>
+  <mat-progress-bar *ngIf="!movie" color="primary" mode="indeterminate"> </mat-progress-bar>
+  <div *ngIf="movie" class="movie-expo" [style.background-image]="'url(' + movie.backdrop_path + ')'">
+    <div class="movie-head">
+      <h2 class="mat-h2">
+        <button mat-icon-button class="btn-back" (click)="back()">
+          <mat-icon>arrow_back</mat-icon>
+        </button> {{movie.title}}</h2>
+      <p class="movie-info">
+        <mat-icon>date_range</mat-icon> {{movie.release_date | date: 'y'}} •
+        <mat-icon>timer</mat-icon> {{movie.runtime}} minutes •
+        <mat-icon [ngClass]="{'mat-green': movie.vote_average >= 5, 'mat-red': movie.vote_average < 5}">star</mat-icon> {{movie.vote_average}}
+        <a href="javascript:void(0)" (click)="openShare()">
+          <mat-icon class="mat-18">share</mat-icon>Share</a>
+      </p>
+    </div>
+  </div>
+  <div *ngIf="movie" class="movie-details">
 
-  <mat-progress-bar *ngIf="!movie" class="example-margin" color="primary" mode="indeterminate"> </mat-progress-bar>
+    <mat-tab-group (selectedIndexChange)="selectChange($event)">
+      <mat-tab label="Details">
 
-  <mat-card *ngIf="movie" class="movie-details">
-    <mat-card-content>
-      <!--<img [src]="movie.backdrop_path" alt="">-->
-      <div [style.background-image]="'url(' + movie.backdrop_path + ')'" class="movie-img"></div>
-      <mat-tab-group (selectedIndexChange)="selectChange($event)" [(selectedIndex)]="index">
-        <mat-tab label="Details">
-          <h4>{{movie.title}}</h4>
+        <p>{{movie.overview}}</p>
 
-          <p>{{movie.overview}}</p>
+        <mat-chip-list>
+          <mat-chip *ngFor="let genre of movie.genres">{{genre.name}}</mat-chip>
+        </mat-chip-list>
+        <h4>Casting</h4>
+        <mat-card class="cast-list" *ngFor="let cast of  movie.cast">
+          <mat-card-header>
+            <div mat-card-avatar [style.background-image]="'url(' + cast.imgUrl + ')'" class="cast-header-image"></div>
+            <mat-card-title>{{cast.name}}</mat-card-title>
+            <mat-card-subtitle>{{cast.character}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
 
-          <mat-chip-list>
-            <mat-chip *ngFor="let genre of movie.genres">{{genre.name}}</mat-chip>
-          </mat-chip-list>
-        </mat-tab>
+      </mat-tab>
 
-        <mat-tab label="Trailers">
-          <mat-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.videos">
-          </mat-progress-spinner>
-          <div *ngFor="let video of movie.videos" class="movie-trailers">
-            <mat-card (click)="openDialog(video)">
-              <a href="javascript:void(0)">
-                <img [src]="video.imgUrl" [alt]="movie.title">
-              </a>
-            </mat-card>
+      <mat-tab label="Trailers">
+        <mat-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.videos">
+        </mat-progress-spinner>
+        <a *ngFor="let video of movie.videos" title="video.name" class="movie-trailers ng-lazyloaded" (click)="openDialog(video)"
+          [style.background-image]="'url(' + video.imgUrl + ')'">
+        </a>
+      </mat-tab>
+      <mat-tab label="Reviews">
+        <p *ngIf="movie.reviews && movie.reviews.length == 0">
+          No Review Yet!
+        </p>
+        <mat-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.reviews">
+        </mat-progress-spinner>
+        <div *ngFor="let review of movie.reviews">
+          <h4>{{review.author}}</h4>
+          <p>{{review.content}}</p>
+          <hr>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="Similar Movies">
+        <p *ngIf="movie.similarMovies && movie.similarMovies.length == 0">
+          No Review Yet!
+        </p>
+        <mat-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.similarMovies">
+        </mat-progress-spinner>
+        <div class="similar-movies">
+          <div *ngFor="let sm of movie.similarMovies" class="item" (click)="goToMovieDetails(sm)">
+            <div class="s-movie ng-lazyloaded" [style.background-image]="'url(' + sm.poster_path + ')'">
+            </div>
           </div>
-        </mat-tab>
-        <mat-tab label="Reviews">
-          <p *ngIf="movie.reviews && movie.reviews.length == 0">
-            No Review Yet!
-          </p>
-          <mat-progress-spinner color="primary" mode="indeterminate" *ngIf="!movie.reviews">
-          </mat-progress-spinner>
-          <div *ngFor="let review of movie.reviews">
-            <h4>{{review.author}}</h4>
-            <p>{{review.content}}</p>
-            <hr>
-          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
 
-        </mat-tab>
-      </mat-tab-group>
-
-    </mat-card-content>
-
-  </mat-card>
-
+  </div>
 </div>

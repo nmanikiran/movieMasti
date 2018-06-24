@@ -1,0 +1,24 @@
+.share-container {
+    overflow: hidden;
+    clear: both;
+    width: 100%;
+}
+
+.actions .mat-form-field {
+    width: 100%;
+}
+
+.poster {
+    height: 300px;
+    width: 30%;
+    margin-right: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+.actions {
+    float: left;
+    width: 65%;
+    text-align: left;
+}

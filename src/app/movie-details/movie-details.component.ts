@@ -39,7 +39,7 @@ export class MovieDetailsComponent implements OnInit {
       this.getCast();
       this.titleService.setTitle(res.title);
       this.movie.poster_path = `${environment.imgUrl}${this.movie.poster_path}`;
-      this.movie.backdrop_path = `http://image.tmdb.org/t/p/original/${
+      this.movie.backdrop_path = `http://image.tmdb.org/t/p/original${
         this.movie.backdrop_path
       }`;
     });
@@ -88,7 +88,7 @@ export class MovieDetailsComponent implements OnInit {
     }
     if (this.movieId) {
       this.dbService.getSimilarMovies(this.movieId).subscribe((res: any) => {
-        this.movie.similarMovies = res || [];
+        this.movie.similarMovies = this.dbService.formatMovies(res.results);
       });
     }
   }

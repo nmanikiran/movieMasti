@@ -10,6 +10,31 @@
     right: 10px;
 }
 
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+/* start commented backslash hack \*/
+
+* html .clearfix {
+    height: 1%;
+}
+
+.clearfix {
+    display: block;
+}
+
+/* close commented backslash hack */
+
 .container {
     clear: both;
     width: 90%;
@@ -25,8 +50,6 @@
     flex-flow: row wrap;
 }
 
-
-
 .ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -39,6 +62,11 @@
     width: 350px;
     margin: 10px;
     cursor: pointer;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
 }
 
 @media only screen and (max-width: 1024px) {

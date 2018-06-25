@@ -97,10 +97,10 @@ export class MovieDBService {
     );
   }
 
-  private formatMovies(res: Response) {
+  formatMovies(items) {
     const placeholderImg = environment.placeholderImg;
     const imgUrl = environment.imgUrl;
-    return res['results'].map(item => {
+    return items.map(item => {
       if (item) {
         item.poster_path = item.poster_path
           ? `${imgUrl}${item.poster_path}`
@@ -117,7 +117,7 @@ export class MovieDBService {
   getSimilarMovies(movie_id): Observable<Response> {
     const similarMovieUrl = `${this.API_BASE}movie/${movie_id}/similar`;
     return this.http.get(similarMovieUrl, this.formatParams({})).pipe(
-      map(this.formatMovies),
+      map((res: Response) => res),
       catchError(this.handleError)
     );
   }
@@ -136,7 +136,7 @@ export class MovieDBService {
     // options.api_key = this.API_KEY;
     const discoverUrl = `${this.API_BASE}discover/${type}`;
     return this.http.get(discoverUrl, this.formatParams(options)).pipe(
-      map(this.formatMovies),
+      map((res: Response) => res),
       catchError(this.handleError)
     );
   }

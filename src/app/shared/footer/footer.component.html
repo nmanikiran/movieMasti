@@ -1,0 +1,32 @@
+<footer class="container">
+  <nav class="clearfix">
+    <ul class="pagination">
+      <li [ngClass]="{disabled:pager.currentPage === 1}" title="First">
+        <a (click)="setPage(1)">
+          <mat-icon>first_page</mat-icon>
+        </a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === 1}" title="Prev">
+        <a (click)="setPage(pager.currentPage - 1)">
+          <mat-icon>chevron_left</mat-icon>
+        </a>
+      </li>
+      <li>{{pager.currentPage}}</li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" title="Next">
+        <a (click)="setPage(pager.currentPage + 1)">
+          <mat-icon>chevron_right</mat-icon>
+        </a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" title="Last">
+        <a (click)="setPage(pager.totalPages)">
+          <mat-icon>last_page</mat-icon>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="clearfix">
+    <p> Made with &#10084; by
+      <a href="https://github.com/nmanikiran">Mani Kiran</a>
+    </p>
+  </div>
+</footer>

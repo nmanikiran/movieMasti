@@ -13,12 +13,14 @@ import { MovieDBService } from '../services/movie-db.service';
 export class MoviesComponent implements OnInit {
   itemList: any;
   defaultImage = environment.placeholderImg;
+  options = { page: 1 };
+  pager = { currentPage: 1, totalPages: 0 };
   constructor(
     private titleService: Title,
     public DBService: MovieDBService,
     private router: Router
   ) {
-    this.getDiscover({});
+    this.getDiscover(this.options);
     this.titleService.setTitle('Discover New Movies');
   }
 
@@ -26,8 +28,18 @@ export class MoviesComponent implements OnInit {
 
   getDiscover(options) {
     this.DBService.getDiscover('movie', options).subscribe((res: any) => {
-      this.itemList = res;
+      this.pager.totalPages = res.total_pages;
+      this.itemList = this.DBService.formatMovies(res.results);
     });
+  }
+
+  changeSelection(options) {
+    this.pager.currentPage = 1;
+    options.page = 1;
+    this.getDiscover(options);
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 1000);
   }
 
   like(e, movie) {
@@ -37,5 +49,11 @@ export class MoviesComponent implements OnInit {
 
   goToMovieDetails(movie) {
     this.router.navigate(['/movie', movie.id]);
+  }
+
+  changePage(pageno) {
+    this.pager.currentPage = pageno;
+    this.options.page = pageno;
+    this.getDiscover(this.options);
   }
 }

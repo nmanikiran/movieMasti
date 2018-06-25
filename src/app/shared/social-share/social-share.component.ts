@@ -12,7 +12,6 @@ export class SocialShareComponent implements OnInit {
     public dialogRef: MatDialogRef<SocialShareComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(this.data);
     this.shareUrl = `https://nmanikiran.github.io/movieMasti/movie/${
       this.data.movie.id
     }`;

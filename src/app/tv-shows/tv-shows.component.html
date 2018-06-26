@@ -1,7 +1,7 @@
 <div class="container">
 
   <h2>Discover TV Shows</h2>
-  <app-filter (filterChange)="getDiscover($event)"></app-filter>
+  <app-filter (filterChange)="changeSelection($event)"></app-filter>
 
 </div>
 
@@ -17,3 +17,7 @@
 
   </mat-card>
 </div>
+<div class="clearfix">
+  <app-footer [pager]="pager" (changePage)="changePage($event)"></app-footer>
+</div>
+

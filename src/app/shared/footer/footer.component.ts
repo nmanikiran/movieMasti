@@ -6,8 +6,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  @Input() pager;
 
+  @Input() pager;
   @Output() changePage = new EventEmitter<number>();
 
   constructor() {}
@@ -19,7 +19,5 @@ export class FooterComponent implements OnInit {
     }
     this.changePage.emit(page);
   }
-  ngOnInit() {
-    console.log(this.pager);
-  }
+  ngOnInit() {}
 }

@@ -15,6 +15,7 @@ export class MoviesComponent implements OnInit {
   defaultImage = environment.placeholderImg;
   options = { page: 1 };
   pager = { currentPage: 1, totalPages: 0 };
+  isLoading = false;
   constructor(
     private titleService: Title,
     public DBService: MovieDBService,
@@ -27,19 +28,29 @@ export class MoviesComponent implements OnInit {
   ngOnInit() {}
 
   getDiscover(options) {
-    this.DBService.getDiscover('movie', options).subscribe((res: any) => {
-      this.pager.totalPages = res.total_pages;
-      this.itemList = this.DBService.formatMovies(res.results);
-    });
+    if (this.isLoading) {
+      return;
+    }
+    this.isLoading = true;
+    this.DBService.getDiscover('movie', options).subscribe(
+      (res: any) => {
+        this.pager.totalPages = res.total_pages;
+        this.isLoading = false;
+        this.itemList = this.DBService.formatMovies(res.results);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 1000);
+      },
+      error => {
+        this.isLoading = false;
+      }
+    );
   }
 
   changeSelection(options) {
     this.pager.currentPage = 1;
     options.page = 1;
     this.getDiscover(options);
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 1000);
   }
 
   like(e, movie) {

@@ -6,6 +6,8 @@
 </div>
 
 <div class="main-content">
+  <mat-progress-spinner color="primary" mode="indeterminate" *ngIf="isLoading">
+  </mat-progress-spinner>
   <mat-card class="example-card" *ngFor="let movie of itemList" (click)="goToMovieDetails(movie)">
     <img mat-card-image [defaultImage]="defaultImage" [lazyLoad]="movie.backdrop_path" class="card-img" [alt]="movie.title">
     <mat-card-content>

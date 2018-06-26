@@ -39,7 +39,7 @@ export class MovieDetailsComponent implements OnInit {
       this.getCast();
       this.titleService.setTitle(res.title);
       this.movie.poster_path = `${environment.imgUrl}${this.movie.poster_path}`;
-      this.movie.backdrop_path = `http://image.tmdb.org/t/p/original${
+      this.movie.backdrop_path = `https://image.tmdb.org/t/p/original${
         this.movie.backdrop_path
       }`;
     });

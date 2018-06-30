@@ -15,7 +15,8 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatGridListModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 
@@ -37,7 +38,8 @@ import { NgModule } from '@angular/core';
     MatListModule,
     MatButtonModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    MatGridListModule
   ],
   exports: [
     MatCommonModule,
@@ -56,7 +58,8 @@ import { NgModule } from '@angular/core';
     MatListModule,
     MatButtonModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    MatGridListModule
   ],
   providers: [],
   declarations: []

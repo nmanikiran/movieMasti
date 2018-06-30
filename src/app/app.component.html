@@ -1,4 +1,4 @@
-<mat-sidenav-container fullscreen>
+<mat-sidenav-container fullscreen [ngClass]="themeName">
   <mat-toolbar color="primary" class="fixed-header" role="toolbar">
     <button mat-icon-button (click)="sideNav.open()" role="button">
       <mat-icon>view_headline</mat-icon>
@@ -7,6 +7,17 @@
     <h3 [routerLink]="['/movies']">{{title}}</h3>
 
     <div class="nav-right">
+
+      <button mat-icon-button [matMenuTriggerFor]="colorPicker" role="button">
+        <mat-icon>format_color_fill</mat-icon>
+      </button>
+      <mat-menu #colorPicker="matMenu" role="menu">
+        <mat-grid-list cols="2" rowHeight="1:1" gutterSize="10px">
+          <mat-grid-tile *ngFor="let tile of colors" (click)="changeTheme(tile.color)">
+            <div class="circle" [style.background]="tile.color"></div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-menu>
       <button mat-icon-button [matMenuTriggerFor]="menu" role="button">
         <mat-icon>more_vert</mat-icon>
       </button>

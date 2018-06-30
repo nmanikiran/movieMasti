@@ -1,0 +1,122 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+@include mat-core();
+$custom-primary: mat-palette($mat-deep-purple, 600);
+$custom-accent: mat-palette($mat-lime, 100);
+$custom-warn: mat-palette($mat-red);
+$custom-theme: mat-light-theme($custom-primary, $custom-accent, $custom-warn);
+@include angular-material-theme($custom-theme);
+// orange
+$orange-primary: mat-palette($mat-orange);
+$orange-accent: mat-palette($mat-amber, A200, A100, A400);
+$orange-warn: mat-palette($mat-red);
+$orange-theme: mat-light-theme($orange-primary, $orange-accent, $orange-warn);
+.orange {
+    @include angular-material-theme($orange-theme);
+}
+
+// green
+$green-primary: mat-palette($mat-green);
+$green-accent: mat-palette($mat-pink, A200, A100, A400);
+$green-warn: mat-palette($mat-red);
+$green-theme: mat-light-theme($green-primary, $green-accent, $green-warn);
+.lightgreen {
+    @include angular-material-theme($green-theme);
+}
+
+// pink
+$pink-primary: mat-palette($mat-pink);
+$pink-accent: mat-palette($mat-pink, A200, A100, A400);
+$pink-warn: mat-palette($mat-red);
+$pink-theme: mat-light-theme($pink-primary, $pink-accent, $pink-warn);
+.pink {
+    @include angular-material-theme($pink-theme);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.nav-right {
+    position: absolute;
+    right: 10px;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+/* start commented backslash hack \*/
+
+* html .clearfix {
+    height: 1%;
+}
+
+.clearfix {
+    display: block;
+}
+
+/* close commented backslash hack */
+
+.container {
+    clear: both;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.main-content {
+    padding: 20px;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+}
+
+.ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+    display: block;
+}
+
+.example-card {
+    width: 350px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+@media only screen and (max-width: 1024px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    .main-content {
+        padding: 5px;
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .mat-card-subtitle,
+    .mat-card-content,
+    .mat-card-header .mat-card-title {
+        font-size: 16px;
+    }
+}

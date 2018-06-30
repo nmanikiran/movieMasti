@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-social-share',
   templateUrl: './social-share.component.html',
-  styleUrls: ['./social-share.component.css']
+  styleUrls: ['./social-share.component.scss']
 })
 export class SocialShareComponent implements OnInit {
   shareUrl: string;

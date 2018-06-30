@@ -4,7 +4,7 @@ import { MovieDBService } from '../../services/movie-db.service';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
   @Output() filterChange = new EventEmitter<any>();

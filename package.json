@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-github": "ng build --prod --base-href /movieMasti/",
-    "deploy-gh-pages": "git subtree split --prefix dist -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages"
+    "deploy": "gh-pages -d dist"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +28,7 @@
     "@angular/router": "6.0.4",
     "@angular/service-worker": "^6.0.4",
     "core-js": "^2.4.1",
+    "gh-pages": "^2.0.0",
     "global": "^4.3.2",
     "hammerjs": "^2.0.8",
     "live-server": "^1.2.0",

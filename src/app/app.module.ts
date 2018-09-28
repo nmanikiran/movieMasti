@@ -52,7 +52,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     LazyLoadImageModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
-    })
+    }),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
@@ -62,4 +63,4 @@ export class MyHammerConfig extends HammerGestureConfig {
   bootstrap: [AppComponent],
   entryComponents: [TrailerDialogComponent, SocialShareComponent]
 })
-export class AppModule {}
+export class AppModule { }

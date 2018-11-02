@@ -9,10 +9,10 @@
       "urls": [
         "/movieMasti/favicon.ico",
         "/movieMasti/index.html",
-        "/movieMasti/main.e2cfca7812a40015b4d3.js",
-        "/movieMasti/polyfills.1cd5af6b985262c64800.js",
-        "/movieMasti/runtime.a66f828dca56eeb90e02.js",
-        "/movieMasti/styles.4c348fe74072838cd305.css"
+        "/movieMasti/main.a8b680f0c6c858fe9301.js",
+        "/movieMasti/polyfills.9d02003b6ccac27ce6ad.js",
+        "/movieMasti/runtime.ec2944dd8b20ec099bf3.js",
+        "/movieMasti/styles.442f1b2fc4f51ebc8aa7.css"
       ],
       "patterns": []
     },
@@ -44,11 +44,11 @@
     "/movieMasti/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/movieMasti/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/movieMasti/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/movieMasti/index.html": "e4af3107a4576422d615fe779e276c84dbb38181",
-    "/movieMasti/main.e2cfca7812a40015b4d3.js": "83fd5c1ef3f351a9cad103c58f7ad25618e63586",
-    "/movieMasti/polyfills.1cd5af6b985262c64800.js": "1d679c308a5d7bca2bd014d74fafc642782770e0",
-    "/movieMasti/runtime.a66f828dca56eeb90e02.js": "078e320cc6fdaf355836c3b1c52b059cdd33fc7e",
-    "/movieMasti/styles.4c348fe74072838cd305.css": "2290035691982f1f817cf37b79d9ecc49df7a238"
+    "/movieMasti/index.html": "52ac3ae6ead9328cee9bceb680ae30ca9fc98916",
+    "/movieMasti/main.a8b680f0c6c858fe9301.js": "45eac04985c85aff7107386b6cd1993ff904d5f8",
+    "/movieMasti/polyfills.9d02003b6ccac27ce6ad.js": "ff0e2ff3fa9bbe8b198d1aaef7d861130eb2e48d",
+    "/movieMasti/runtime.ec2944dd8b20ec099bf3.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "/movieMasti/styles.442f1b2fc4f51ebc8aa7.css": "b86a9e292b8135df64bfff4fd9716ab23a6868b8"
   },
   "navigationUrls": [
     {
@@ -57,15 +57,15 @@
     },
     {
       "positive": false,
-      "regex": "^\\/(?:.+\\/)?[^\\/]*\\.[^\\/]*$"
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
     },
     {
       "positive": false,
-      "regex": "^\\/(?:.+\\/)?[^\\/]*__[^\\/]*$"
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
     },
     {
       "positive": false,
-      "regex": "^\\/(?:.+\\/)?[^\\/]*__[^\\/]*\\/.*$"
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
     }
   ]
 }

@@ -8,7 +8,7 @@ import { MovieDBService } from '../services/movie-db.service';
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.scss']
+  styleUrls: ['./movies.component.scss'],
 })
 export class MoviesComponent implements OnInit {
   itemList: any;
@@ -19,7 +19,7 @@ export class MoviesComponent implements OnInit {
   constructor(
     private titleService: Title,
     public DBService: MovieDBService,
-    private router: Router
+    private router: Router,
   ) {
     this.getDiscover(this.options);
     this.titleService.setTitle('Discover New Movies');
@@ -41,9 +41,9 @@ export class MoviesComponent implements OnInit {
           window.scrollTo(0, 0);
         }, 1000);
       },
-      error => {
+      (error) => {
         this.isLoading = false;
-      }
+      },
     );
   }
 

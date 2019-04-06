@@ -1,24 +1,29 @@
 .share-container {
-    overflow: hidden;
-    clear: both;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-items: flex-start;
+}
+
+.item-poster {
+  height: 300px;
+  flex: 1;
+  margin-right: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.item-details {
+  flex: 2;
+  text-align: left;
+  .mat-form-field {
     width: 100%;
-}
-
-.actions .mat-form-field {
-    width: 100%;
-}
-
-.poster {
-    height: 300px;
-    width: 30%;
-    margin-right: 10px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    float: left;
-}
-
-.actions {
-    float: left;
-    width: 65%;
-    text-align: left;
+  }
+  .item-social-share {
+    display: flex;
+    justify-content: space-around;
+  }
+  .actions {
+    display: flex;
+  }
 }

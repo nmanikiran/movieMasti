@@ -4,13 +4,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-social-share',
   templateUrl: './social-share.component.html',
-  styleUrls: ['./social-share.component.scss']
+  styleUrls: ['./social-share.component.scss'],
 })
 export class SocialShareComponent implements OnInit {
   shareUrl: string;
   constructor(
     public dialogRef: MatDialogRef<SocialShareComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.shareUrl = `https://nmanikiran.github.io/movieMasti/movie/${
       this.data.movie.id

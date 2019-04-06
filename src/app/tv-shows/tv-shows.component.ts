@@ -1,12 +1,11 @@
 import { MovieDBService } from 'app/services/movie-db.service';
 import { Component, OnInit } from '@angular/core';
-import { MatFormFieldControl } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'environments/environment';
 @Component({
   selector: 'app-tv-shows',
   templateUrl: './tv-shows.component.html',
-  styleUrls: ['./tv-shows.component.scss']
+  styleUrls: ['./tv-shows.component.scss'],
 })
 export class TvShowsComponent implements OnInit {
   itemList: any;
@@ -35,9 +34,9 @@ export class TvShowsComponent implements OnInit {
           window.scrollTo(0, 0);
         }, 1000);
       },
-      error => {
+      (error) => {
         this.isLoading = false;
-      }
+      },
     );
   }
 

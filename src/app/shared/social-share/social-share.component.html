@@ -1,23 +1,36 @@
-<h1 matDialogTitle> Socail Share</h1>
+<h1 matDialogTitle>Socail Share</h1>
 
 <mat-dialog-content>
   <div class="share-container">
-    <div class="poster" [style.background-image]="'url(' + data.movie.poster_path + ')'">
-    </div>
-    <div class="actions">
-      <h2>{{data.movie.title}}</h2>
-      <a href="javascript:void(0)" role="button" mat-button (click)="share('facebook')">Facebook</a>
-      <a href="javascript:void(0)" role="button" mat-button (click)="share('twitter')">Twitter</a>
-      <a href="javascript:void(0)" role="button" mat-button (click)="share('google+')">Google +</a>
+    <div
+      class="item-poster"
+      [style.background-image]="'url(' + data.movie.poster_path + ')'"
+    ></div>
+    <div class="item-details">
+      <h2>{{ data.movie.title }}</h2>
+      <div class="item-social-share">
+        <button mat-raised-button (click)="share('facebook')">Facebook</button>
+        <button mat-raised-button (click)="share('twitter')">Twitter</button>
+        <button mat-raised-button (click)="share('google+')">Google +</button>
+      </div>
       <br />
       <mat-form-field>
-        <input id="inputId" matInput [ngModel]="shareUrl">
+        <input id="inputId" matInput [ngModel]="shareUrl" />
       </mat-form-field>
-      <p>
-        <button mat-raised-button role="button" color="primary" (click)="copyLink(data.id)" cdkFocusInitial>Copy Link</button>
-        <button mat-raised-button role="button" (click)="onNoClick()">Ok</button>
+      <p class="actions">
+        <button
+          mat-raised-button
+          role="button"
+          color="primary"
+          (click)="copyLink(data.id)"
+          cdkFocusInitial
+        >
+          Copy Link
+        </button>
+        <button mat-raised-button role="button" (click)="onNoClick()">
+          Ok
+        </button>
       </p>
     </div>
   </div>
-
 </mat-dialog-content>

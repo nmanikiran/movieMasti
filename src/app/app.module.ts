@@ -4,17 +4,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   BrowserModule,
   HAMMER_GESTURE_CONFIG,
-  HammerGestureConfig
+  HammerGestureConfig,
 } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 import { FilterComponent } from './shared/filter/filter.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { MovieDBService } from './services/movie-db.service';
 import {
   MovieDetailsComponent,
-  TrailerDialogComponent
+  TrailerDialogComponent,
 } from './movie-details/movie-details.component';
 import { MoviesComponent } from './movies/movies.component';
 import { NgModule } from '@angular/core';
@@ -27,7 +26,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     pinch: { enable: false },
-    rotate: { enable: false }
+    rotate: { enable: false },
   };
 }
 
@@ -40,7 +39,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     TvShowsComponent,
     MoviesComponent,
     FilterComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,17 +48,16 @@ export class MyHammerConfig extends HammerGestureConfig {
     HttpClientModule,
     SharedModule,
     AppRoutingModule,
-    LazyLoadImageModule,
     ServiceWorkerModule.register('/movieMasti/ngsw-worker.js', {
-      enabled: environment.production
-    })
+      enabled: environment.production,
+    }),
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
     MovieDBService,
-    SwService
+    SwService,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [TrailerDialogComponent, SocialShareComponent]
+  entryComponents: [TrailerDialogComponent, SocialShareComponent],
 })
 export class AppModule {}

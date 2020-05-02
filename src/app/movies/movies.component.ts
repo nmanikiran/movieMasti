@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatFormFieldControl } from '@angular/material';
+import { MatFormFieldControl } from '@angular/material/form-field';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { environment } from 'environments/environment';

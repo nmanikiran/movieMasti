@@ -1,36 +1,53 @@
 <mat-sidenav-container fullscreen [ngClass]="themeName">
   <mat-toolbar color="primary" class="fixed-header" role="toolbar">
-    <button mat-icon-button (click)="sideNav.open()" role="button">
+    <button
+      mat-icon-button
+      (click)="sideNav.open()"
+      role="button"
+      aria-label="menu"
+    >
       <mat-icon>view_headline</mat-icon>
     </button>
 
-    <h3 [routerLink]="['/movies']">{{title}}</h3>
+    <h3 [routerLink]="['/movies']">{{ title }}</h3>
 
     <div class="nav-right">
-
-      <button mat-icon-button [matMenuTriggerFor]="colorPicker" role="button">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="colorPicker"
+        role="button"
+        aria-label="theme change"
+      >
         <mat-icon>format_color_fill</mat-icon>
       </button>
       <mat-menu #colorPicker="matMenu" role="menu">
         <mat-grid-list cols="2" rowHeight="1:1" gutterSize="10px">
-          <mat-grid-tile *ngFor="let tile of colors" (click)="changeTheme(tile.color)">
+          <mat-grid-tile
+            *ngFor="let tile of colors"
+            (click)="changeTheme(tile.color)"
+          >
             <div class="circle" [style.background]="tile.color"></div>
           </mat-grid-tile>
         </mat-grid-list>
       </mat-menu>
-      <button mat-icon-button [matMenuTriggerFor]="menu" role="button">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        role="button"
+        aria-label="more"
+      >
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu" role="menu">
-        <button mat-menu-item role="menuitem">
+        <button mat-menu-item role="menuitem" aria-label="dialpad">
           <mat-icon>dialpad</mat-icon>
           <span>Popular</span>
         </button>
-        <button mat-menu-item role="menuitem">
+        <button mat-menu-item role="menuitem" aria-label="star">
           <mat-icon>star</mat-icon>
           <span>Top Rated</span>
         </button>
-        <button mat-menu-item role="menuitem">
+        <button mat-menu-item role="menuitem" aria-label="Upcoming">
           <mat-icon>notifications</mat-icon>
           <span>Upcoming</span>
         </button>
@@ -40,12 +57,22 @@
 
   <mat-sidenav #sideNav class="height">
     <mat-list>
-      <a role="link" mat-list-item [routerLink]="['/movies']" (click)="sideNav.close()">Movies</a>
-      <a role="link" mat-list-item [routerLink]="['/tv-shows']" (click)="sideNav.close()">Tv Shows</a>
-
+      <a
+        role="link"
+        mat-list-item
+        [routerLink]="['/movies']"
+        (click)="sideNav.close()"
+        >Movies</a
+      >
+      <a
+        role="link"
+        mat-list-item
+        [routerLink]="['/tv-shows']"
+        (click)="sideNav.close()"
+        >Tv Shows</a
+      >
     </mat-list>
   </mat-sidenav>
 
   <router-outlet></router-outlet>
-
 </mat-sidenav-container>

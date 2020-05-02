@@ -8,13 +8,18 @@
   >
     <div class="movie-head">
       <h2 class="mat-h2">
-        <button mat-icon-button class="btn-back" (click)="back()">
+        <button
+          mat-icon-button
+          class="btn-back"
+          (click)="back()"
+          aria-label="back"
+        >
           <mat-icon>arrow_back</mat-icon>
         </button>
         {{ movie.title }}
       </h2>
       <p class="movie-info">
-        <mat-icon>date_range</mat-icon> {{ movie.release_date | date: 'y' }} •
+        <mat-icon>date_range</mat-icon> {{ movie.release_date | date: "y" }} •
         <mat-icon>timer</mat-icon> {{ movie.runtime }} minutes •
         <mat-icon
           [ngClass]="{
